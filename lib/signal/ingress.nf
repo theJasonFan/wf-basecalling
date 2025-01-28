@@ -367,7 +367,10 @@ workflow wf_dorado {
                 // If not pass is provided, treat all as pass. The chunk number goes first to perform chunk
                 // clustering appropriately.
                 .map{ pod5_index, cell_id, run_id, pass, pod5 ->
-                    [Math.floor(pod5_index/params.basecaller_chunk_size), cell_id, run_id, pass, pod5]
+                    // [Math.floor(pod5_index/params.basecaller_chunk_size), cell_id, run_id, pass, pod5]
+                    // TODO/FIXME/NB: something silly, just to disable chunks
+                    [0, cell_id, run_id, pass, pod5]
+
                 }
                 // Group them by chunk, flowcell, run and pass/fail
                 .groupTuple(
